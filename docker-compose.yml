@@ -1,0 +1,16 @@
+services:
+  waf:
+    image: owasp/modsecurity-crs:nginx
+    container_name: nginx-waf
+    ports:
+      - "8080:8080"
+    environment:
+      - BACKEND=http://juice:3000
+    depends_on:
+      - juice
+
+  juice:
+    image: bkimminich/juice-shop
+    container_name: juice-shop
+    expose:
+      - "3000"
